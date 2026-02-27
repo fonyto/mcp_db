@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: company_postgres
+    environment:
+      POSTGRES_DB: chinook
+      POSTGRES_USER: chinook_user
+      POSTGRES_PASSWORD: chinook_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./Chinook_PostgreSql.sql:/docker-entrypoint-initdb.d/Chinook_PostgreSql.sql
+    ports:
+      - "127.0.0.1:5432:5432"
+    networks:
+      - mcp_network
+
+  mcp-server:
+    build: .
+    container_name: company_mcp_server
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: chinook_user
+      DB_PASSWORD: chinook_password
+      DB_DATABASE: chinook
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - mcp_network
+
+networks:
+  mcp_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
