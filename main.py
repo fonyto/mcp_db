@@ -24,8 +24,8 @@ def list_tracks(limit: int = 5) -> List[Dict[str, Any]]:
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute("" \
-        "SELECT AlbumId, Name, Composer FROM Track ORDER BY Composer LIMIT %s", 
+        cursor.execute(
+        """SELECT AlbumId, Name, Composer FROM Track ORDER BY Composer LIMIT %s""", 
         (limit,))
 
         rows = cursor.fetchall()
