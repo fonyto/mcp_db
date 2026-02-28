@@ -18,6 +18,8 @@ def get_db_connection():
     )
     return conn 
 
+
+#Herramienta
 @app.tool
 def list_tracks(limit: int = 5) -> List[Dict[str, Any]]:
     """Listar los tracks disponibles en la base de datos"""
@@ -25,14 +27,14 @@ def list_tracks(limit: int = 5) -> List[Dict[str, Any]]:
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute(
-        """SELECT albumid, name, composer FROM track ORDER BY composer LIMIT %s""", 
+        """SELECT album_id, name, composer FROM track ORDER BY composer LIMIT %s""", 
         (limit,))
 
         rows = cursor.fetchall()
         tracks = []
         for row in rows:
             tracks.append({
-                "album_id": row["albumid"], 
+                "album_id": row["album_id"], 
                 "name": row["name"],
                 "composer": row["composer"]
             })       
