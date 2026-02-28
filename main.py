@@ -25,16 +25,16 @@ def list_tracks(limit: int = 5) -> List[Dict[str, Any]]:
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute(
-        """SELECT AlbumId, Name, Composer FROM Track ORDER BY Composer LIMIT %s""", 
+        """SELECT albumid, name, composer FROM track ORDER BY composer LIMIT %s""", 
         (limit,))
 
         rows = cursor.fetchall()
         tracks = []
         for row in rows:
             tracks.append({
-                "album_id": row["AlbumId"], 
-                "name": row["Name"],
-                "composer": row["Composer"]
+                "album_id": row["albumid"], 
+                "name": row["name"],
+                "composer": row["composer"]
             })       
         cursor.close()
         conn.close()
