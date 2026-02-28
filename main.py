@@ -32,9 +32,9 @@ def list_tracks(limit: int = 5) -> List[Dict[str, Any]]:
         tracks = []
         for row in rows:
             tracks.append({
-                "album_id": row["albumid"], 
-                "name": row["name"],
-                "composer": row["composer"]
+                "album_id": row["AlbumId"], 
+                "name": row["Name"],
+                "composer": row["Composer"]
             })       
         cursor.close()
         conn.close()
