@@ -9,11 +9,11 @@ app = FastMCP("company-db-server")
 
 def get_db_connection():
     conn = psycopg2.connect(
-        host=os.environ.get("DB_HOST", "localhost"),
+        host=os.environ.get("DB_HOST"),
         port= int(os.environ.get("DB_PORT")),
-        user=os.environ.get("DB_USER", "postgres"),
+        user=os.environ.get("DB_USER"),
         password=os.environ.get("DB_PASSWORD"),        
-        database=os.environ.get("DB_NAME", "company_db"),
+        database=os.environ.get("DB_NAME"),
         cursor_factory = RealDictCursor
     )
     return conn 
